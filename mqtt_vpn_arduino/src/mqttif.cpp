@@ -227,6 +227,7 @@ void mqtt_if_add_reading_topic(struct mqtt_if_data *data, IPAddress addr)
     ipaddr.addr = addr;
     data->addr_topic[data->n_addr] = (char *)malloc(os_strlen((const char *)data->topic_pre) + 20);
     os_sprintf(data->addr_topic[data->n_addr], "%s/" IPSTR, (char *)data->topic_pre, IP2STR(&ipaddr));
+  	MQTT_Subscribe(data->mqttcl, data->addr_topic[data->n_addr], 0);
     data->n_addr++;
   }
 }
